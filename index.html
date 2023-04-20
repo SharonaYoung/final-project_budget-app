@@ -8,11 +8,22 @@
   </head>
   <body>
     <h1>Sharona's Budget App</h1>
-    <form id="budgetAmt">
-      <input type="text" id="budget" />
-      <button type="submit" id="submitBudget">Submit</button>
-    </form>
+    <div id="amt">
+      <p>Enter your starting budget amount</p>
+      <form id="budgetAmt">
+        <input type="text" id="budget" />
+        <button type="submit" id="submitBudget">Submit</button>
+      </form>
+    </div>
+    <div id="categories" class="hidden">
+      <form id="catForm">
+        <input type="text" id="catInput" placeholder="Enter budget category" />
+        <input type="text" id="amtInput" placeholder="Enter category amount" />
+        <button id="newCat">Enter</button>
+      </form>
+    </div>
 
+    <div id="categories"></div>
     <script src="./dist/main.js"></script>
   </body>
 </html>

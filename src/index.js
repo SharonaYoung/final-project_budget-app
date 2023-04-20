@@ -1,13 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { submitBudget } from "./utils";
+import { submitBudget, newCategory } from "./utils";
 import './style.css';
 
-const submitBudgetEl = document.querySelector('#submitBudget')
+const budgetAmtForm = document.querySelector('#budgetAmt')
+const CatForm = document.querySelector('#catForm');
 
-submitBudgetEl.addEventListener('click', function(event){
+// submit the starting budget amount
+budgetAmtForm.addEventListener('submit', function(event){
   event.preventDefault();
   submitBudget();
-  document.getElementById('budgetAmt').classList.add('hidden');
+  console.log("budget amount");
 });
+
+// submit a category and amount
+CatForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  newCategory();
+})
 
 console.log("Hello from index.js");
