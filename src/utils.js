@@ -19,6 +19,7 @@ let budgetRemaining;
 function showBudget() {
   budgetStart = parseInt(budgetInput.value);
   budgetRemaining = budgetStart;
+  randomColor();
   addToChart(budgetRemaining);
 
   // display budget values to the DOM
@@ -57,10 +58,14 @@ function newCategory() {
   // update remaining balance amount
   document.getElementById('balance').innerHTML = budgetRemaining;
   console.log('remaining budget:  ' + budgetRemaining);
+  randomColor();
   updateChart();
 }
 
-// let inputData = [];
+let colors = [];
+function randomColor() {
+  colors.push('#' + Math.floor(Math.random() * 10000).toString(16))
+}
 
 // display chart
 const budgetChart = new Chart(
@@ -72,7 +77,7 @@ const budgetChart = new Chart(
       datasets: [
         {
           label: 'Total Monthly Budget',
-          backgroundColor: ['#ed45a2', '#caeef2', '#000' ],
+          backgroundColor: colors,
           data: []
         }
       ]
