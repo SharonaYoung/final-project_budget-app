@@ -7,24 +7,38 @@
     <title>Budget App Young S</title>
   </head>
   <body>
-    <h1>Sharona's Budget App</h1>
-    <div id="amt">
-      <p>Enter your starting budget amount</p>
-      <form id="budgetAmt">
-        <input type="text" id="budget" />
-        <button type="submit" id="submitBudget">Submit</button>
-      </form>
-    </div>
-    <div id="categories" class="hidden">
-      <form id="catForm">
-        <input type="text" id="catInput" placeholder="Enter budget category" />
-        <input type="text" id="amtInput" placeholder="Enter category amount" />
-        <button id="newCat">Enter</button>
-      </form>
-    </div>
-    <div id="budgetDisplay" class="hidden">
-      <p>Total Budget: <span id="total"></span></p>
-      <p>Remaining Budget: <span id="balance"></span></p>
+    <div class="container px-4 py-2">
+      <h1 class="text-center my-3">Sharona's Budget App</h1>
+      <div id="amt">
+        <p>Enter your starting budget amount</p>
+        <form id="budgetAmt">
+          <input type="text" id="budget" />
+          <button type="submit" id="submitBudget">Submit</button>
+        </form>
+      </div>
+      <div id="categories" class="hidden">
+        <form id="catForm">
+          <input
+            type="text"
+            id="catInput"
+            placeholder="Enter budget category"
+          />
+          <input
+            type="text"
+            id="amtInput"
+            placeholder="Enter category amount"
+          />
+          <button id="newCat">Enter</button>
+        </form>
+      </div>
+      <div id="budgetDisplay" class="hidden">
+        <p>Total Budget: <span id="total"></span></p>
+        <p>Remaining Budget: <span id="balance"></span></p>
+        <p>Budget Breakdown:</p>
+        <div id="chart">
+          <canvas id="totalBudget"></canvas>
+        </div>
+      </div>
     </div>
     <script src="./dist/main.js"></script>
   </body>

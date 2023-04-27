@@ -1,3 +1,8 @@
+import Chart from 'chart.js/auto';
+
+const budgetInput = document.querySelector('#budget');
+let budgetStart;
+
 // submit budget amount and switch input fields displayed
 export function submitBudget(event) {
   event.preventDefault();
@@ -7,17 +12,14 @@ export function submitBudget(event) {
   showBudget();
 };
 
-// display budget values to the DOM
-const budgetInput = document.querySelector('#budget');
 const catInputEl = document.querySelector('#catInput');
 const amtInputEl = document.querySelector('#amtInput');
-let budgetStart;
 let budgetRemaining;
 
 function showBudget() {
   budgetStart = parseInt(budgetInput.value);
   budgetRemaining = budgetStart;
-  console.log(budgetStart);
+  addToChart(budgetRemaining);
 
   // display budget values to the DOM
   document.getElementById('total').innerHTML = budgetStart
@@ -27,7 +29,7 @@ function showBudget() {
 let categories = [];
 let amounts = [];
 
-// get values from input boxes and add to an array
+// check if budget has enough 
 export function chkCategory(event) {
   event.preventDefault();
   if(budgetStart === 0){
@@ -42,32 +44,48 @@ export function chkCategory(event) {
   else {
     newCategory();
   }
-  console.log(categories, amounts);
 }
 
+// get values from input boxes and add to an array
 function newCategory() {
-  categories.push(catInputEl.value);
-    catInputEl.value = "";
-    amounts.push(parseInt(amtInputEl.value));
-    budgetRemaining = budgetStart -= amtInputEl.value;
-    amtInputEl.value = "";
-    // update remaining balance amount
-    document.getElementById('balance').innerHTML = budgetRemaining;
-    console.log('remaining budget: ' + budgetRemaining);
+  categories.push({"category": catInputEl.value, "amount": (parseInt(amtInputEl.value))});
+  catInputEl.value = "";
+  amounts.push(parseInt(amtInputEl.value));
+  addToChart(amtInputEl.value);
+  budgetRemaining = budgetStart -= amtInputEl.value;
+  amtInputEl.value = "";
+  // update remaining balance amount
+  document.getElementById('balance').innerHTML = budgetRemaining;
+  console.log('remaining budget:  ' + budgetRemaining);
+  updateChart();
 }
 
-/*
-export function display() {  
-  budgetStart = parseInt(budgetInput.value);
-  console.log(budgetStart);
-// display budget values to the DOM
-const totalBudget = `
-  <p>Total Budget $${budgetStart}</p>
-  <p>Remaining Budget $${budgetStart}</p>
-  <p>Budget Breakdown: </p>
-`;
-budgetDisplayEl.innerHTML = totalBudget;
+// let inputData = [];
+
+// display chart
+const budgetChart = new Chart(
+  document.getElementById('totalBudget'),
+  {
+    type: 'pie',
+    data: { 
+      labels: ['Remaining Budget'],    
+      datasets: [
+        {
+          label: 'Total Monthly Budget',
+          backgroundColor: ['#ed45a2', '#caeef2', '#000' ],
+          data: []
+        }
+      ]
+    }
+  }
+)
+
+function addToChart(data){      
+  budgetChart.data.datasets.forEach((dataset) => {
+    dataset.data.push(data);
+  });
+  console.log('updated chart data is: ' + budgetChart.data.datasets[0].data)
 }
-*/
-
-
+function updateChart() {
+  budgetChart.update();
+}

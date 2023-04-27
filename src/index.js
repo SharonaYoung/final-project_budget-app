@@ -10,5 +10,4 @@ budgetAmtForm.addEventListener('submit', submitBudget);
 
 // submit a category and amount
 CatForm.addEventListener('submit', chkCategory);
-
 console.log("Hello from index.js");
