@@ -14,3 +14,9 @@ body{
   border: 1px solid #000;
   background-color: #fff;
 }
+input{
+  margin: 1rem 0;
+}
+#chart {
+
+}

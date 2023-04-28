@@ -20,15 +20,13 @@ function showBudget() {
   budgetStart = parseInt(budgetInput.value);
   budgetRemaining = budgetStart;
   randomColor();
-  addToChart(budgetRemaining);
-
+  addToChart('Remaining Budget', budgetRemaining);
+  console.log('starting budget ' + budgetRemaining);
+  updateChart();
   // display budget values to the DOM
   document.getElementById('total').innerHTML = budgetStart
   document.getElementById('balance').innerHTML = budgetRemaining;
 }
-
-let categories = [];
-let amounts = [];
 
 // check if budget has enough 
 export function chkCategory(event) {
@@ -49,19 +47,20 @@ export function chkCategory(event) {
 
 // get values from input boxes and add to an array
 function newCategory() {
-  categories.push({"category": catInputEl.value, "amount": (parseInt(amtInputEl.value))});
-  catInputEl.value = "";
-  amounts.push(parseInt(amtInputEl.value));
-  addToChart(amtInputEl.value);
+  addToChart(catInputEl.value, amtInputEl.value);
   budgetRemaining = budgetStart -= amtInputEl.value;
+  catInputEl.value = "";
   amtInputEl.value = "";
   // update remaining balance amount
   document.getElementById('balance').innerHTML = budgetRemaining;
   console.log('remaining budget:  ' + budgetRemaining);
   randomColor();
+  budgetChart.data.datasets[0].data.splice(0,1,budgetRemaining);
   updateChart();
+
 }
 
+// generate random color for category
 let colors = [];
 function randomColor() {
   colors.push('#' + Math.floor(Math.random() * 10000).toString(16))
@@ -73,24 +72,37 @@ const budgetChart = new Chart(
   {
     type: 'pie',
     data: { 
-      labels: ['Remaining Budget'],    
+      labels: [],    
       datasets: [
         {
-          label: 'Total Monthly Budget',
           backgroundColor: colors,
           data: []
         }
       ]
     }
+    // options: {
+    //   plugins:{
+    //     tooltip: {
+    //       callbacks:{
+    //         title: function(context) {
+    //           console.log(context[0])
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 )
 
-function addToChart(data){      
+function addToChart(category, amount){   
+  budgetChart.data.labels.push(category);   
   budgetChart.data.datasets.forEach((dataset) => {
-    dataset.data.push(data);
+    dataset.data.push(amount);
   });
-  console.log('updated chart data is: ' + budgetChart.data.datasets[0].data)
 }
+
 function updateChart() {
   budgetChart.update();
+  console.log('----current dataset: ' +  budgetChart.data.datasets[0].data);
+  
 }

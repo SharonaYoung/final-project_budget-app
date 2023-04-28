@@ -11,8 +11,8 @@
       <h1 class="text-center my-3">Sharona's Budget App</h1>
       <div id="amt">
         <p>Enter your starting budget amount</p>
-        <form id="budgetAmt">
-          <input type="text" id="budget" />
+        <form id="budgetAmt" class="needs-validation">
+          <input type="number" class="form-control" id="budget" required />
           <button type="submit" id="submitBudget">Submit</button>
         </form>
       </div>
@@ -20,23 +20,27 @@
         <form id="catForm">
           <input
             type="text"
+            class="form-control"
             id="catInput"
             placeholder="Enter budget category"
+            required
           />
           <input
-            type="text"
+            type="number"
+            class="form-control"
             id="amtInput"
             placeholder="Enter category amount"
+            required
           />
           <button id="newCat">Enter</button>
         </form>
       </div>
-      <div id="budgetDisplay" class="hidden">
+      <div id="budgetDisplay" class="hidden mt-3">
         <p>Total Budget: <span id="total"></span></p>
         <p>Remaining Budget: <span id="balance"></span></p>
         <p>Budget Breakdown:</p>
-        <div id="chart">
-          <canvas id="totalBudget"></canvas>
+        <div id="chart" class="mx-auto">
+          <canvas id="totalBudget" class="mx-auto"></canvas>
         </div>
       </div>
     </div>
