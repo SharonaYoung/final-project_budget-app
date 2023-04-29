@@ -3,11 +3,10 @@ import { submitBudget, chkCategory } from "./utils";
 import './style.css';
 
 const budgetAmtForm = document.querySelector('#budgetAmt')
-const CatForm = document.querySelector('#catForm');
+const catForm = document.querySelector('#catForm');
 
 // submit the starting budget amount
 budgetAmtForm.addEventListener('submit', submitBudget);
 
 // submit a category and amount
-CatForm.addEventListener('submit', chkCategory);
-console.log("Hello from index.js");
+catForm.addEventListener('submit', chkCategory);

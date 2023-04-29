@@ -1,22 +1,25 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 .hidden {
   display: none;
 }
-body{
+
+body {
   background-color: #f4f4f4;
 }
+
 .container {
   max-width: 960px;
-  border: 1px solid #000;
+  border: 1px solid #9a9a9a;
+  box-shadow: 5px 5px 10px #b7a28c;
   background-color: #fff;
+  border-radius: 10px;
 }
-input{
-  margin: 1rem 0;
-}
-#chart {
 
+input {
+  margin: 1rem 0;
 }

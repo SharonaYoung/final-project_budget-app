@@ -21,14 +21,13 @@ function showBudget() {
   budgetRemaining = budgetStart;
   randomColor();
   addToChart('Remaining Budget', budgetRemaining);
-  console.log('starting budget ' + budgetRemaining);
   updateChart();
   // display budget values to the DOM
   document.getElementById('total').innerHTML = budgetStart
   document.getElementById('balance').innerHTML = budgetRemaining;
 }
 
-// check if budget has enough 
+// check if budget has enough
 export function chkCategory(event) {
   event.preventDefault();
   if(budgetStart === 0){
@@ -39,7 +38,7 @@ export function chkCategory(event) {
   else if(amtInputEl.value > budgetRemaining){
     alert("Not enough in budget, enter lower amount");
     amtInputEl.value = "";
-  } 
+  }
   else {
     newCategory();
   }
@@ -53,11 +52,9 @@ function newCategory() {
   amtInputEl.value = "";
   // update remaining balance amount
   document.getElementById('balance').innerHTML = budgetRemaining;
-  console.log('remaining budget:  ' + budgetRemaining);
   randomColor();
   budgetChart.data.datasets[0].data.splice(0,1,budgetRemaining);
   updateChart();
-
 }
 
 // generate random color for category
@@ -71,31 +68,23 @@ const budgetChart = new Chart(
   document.getElementById('totalBudget'),
   {
     type: 'pie',
-    data: { 
-      labels: [],    
+    data: {
+      labels: [],
       datasets: [
         {
           backgroundColor: colors,
-          data: []
+          data: [],
+          borderColor: '#9a9a9a',
+          borderWidth: '.6'
         }
       ]
     }
-    // options: {
-    //   plugins:{
-    //     tooltip: {
-    //       callbacks:{
-    //         title: function(context) {
-    //           console.log(context[0])
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
   }
 )
 
-function addToChart(category, amount){   
-  budgetChart.data.labels.push(category);   
+// add new piece to chart
+function addToChart(category, amount){
+  budgetChart.data.labels.push(category);
   budgetChart.data.datasets.forEach((dataset) => {
     dataset.data.push(amount);
   });
@@ -103,6 +92,4 @@ function addToChart(category, amount){
 
 function updateChart() {
   budgetChart.update();
-  console.log('----current dataset: ' +  budgetChart.data.datasets[0].data);
-  
 }
